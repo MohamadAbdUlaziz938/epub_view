@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:epub_book/view_model/home_view_model.dart';
 import 'package:epub_view/epub_view.dart';
+import 'package:epub_viewer/epub_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key}) : super(key: key);
 

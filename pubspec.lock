@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  epub_viewer:
+    dependency: "direct main"
+    description:
+      name: epub_viewer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.5"
   epubx:
     dependency: transitive
     description:
@@ -387,13 +394,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  vocsy_epub_viewer:
-    dependency: "direct main"
-    description:
-      name: vocsy_epub_viewer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.8"
   win32:
     dependency: transitive
     description:

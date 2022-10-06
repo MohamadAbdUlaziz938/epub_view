@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   epub_view:
   provider:
-  vocsy_epub_viewer:
+  epub_viewer:
+#  vocsy_epub_viewer:
 
 
 
