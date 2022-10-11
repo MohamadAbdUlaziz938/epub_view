@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:epub_book/view_model/home_view_model.dart';
 import 'package:epub_view/epub_view.dart';
-import 'package:epub_viewer/epub_viewer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key}) : super(key: key);
 
@@ -56,17 +58,17 @@ class _ItemBodyState extends State<_ItemBody> {
 
   Future<void> openEpub() async {
     EpubViewer.setConfig(
+
         themeColor: Colors.green,
         identifier: "iosBook",
         scrollDirection: EpubScrollDirection.HORIZONTAL,
         allowSharing: true,
-        enableTts: true,
-        nightMode: false);
+        );
 
     // EpubViewer.locatorStream.listen((locator) {
     //   print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
     // });
-
+  // EpubViewer.open('/storage/emulated/0/Download/1.epub');
     await EpubViewer.openAsset(
       context.read<HomeViewModel>().epubsPath[widget.index].toString(),
       lastLocation: EpubLocator.fromJson({
