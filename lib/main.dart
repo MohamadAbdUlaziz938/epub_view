@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
     //android:exported:'true' to each activity in application and provider receiver
     // we find the when open manifest in android editor in merge manifest section
     // this link is helper https://stackoverflow.com/questions/68554294/androidexported-needs-to-be-explicitly-specified-for-activity-apps-targeting
+    // these manifest need updated :
+    // r2-streamer-kotlin:1.0.4-2 manifest
+    // O2BizServices:folioreader:o2biz-folio-7.0 manifest
 
     // convert app to english to fit with folioreader not work with arabic device
     // go to vocsy_epub_viewer plugin in android folder to set config channel add this code below to fit with arabic devices
