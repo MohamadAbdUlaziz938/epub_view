@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     // these manifest need updated :
     // r2-streamer-kotlin:1.0.4-2 manifest
     // O2BizServices:folioreader:o2biz-folio-7.0 manifest
+    // or we get activity that package us it and add theme to manifest in our project
 
     // convert app to english to fit with folioreader not work with arabic device
     // go to vocsy_epub_viewer plugin in android folder to set config channel add this code below to fit with arabic devices
