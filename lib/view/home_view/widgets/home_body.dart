@@ -4,8 +4,10 @@ import 'package:epub_book/view_model/home_view_model.dart';
 import 'package:epub_view/epub_view.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
+
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLoading = context
         .select((HomeViewModel homeViewModel) => homeViewModel.isLoading);
-    List<EpubBook> epubListBook = context.read<HomeViewModel>().epubListBook;
+    List<EpubBook?> epubListBook = context.read<HomeViewModel>().epubListBook;
     return !isLoading
         ? GridView.builder(
             gridDelegate:
@@ -45,30 +47,39 @@ class _ItemBodyState extends State<_ItemBody> {
   @override
   void initState() {
     super.initState();
-
     epubByteContentFile = context
         .read<HomeViewModel>()
         .epubListBook[widget.index]
-        .Content
+        ?.Content
         ?.Images
         ?.values
         .toList();
     images = epubByteContentFile?.map((e) => e.Content).toList();
+    loadDefaultImage();
+  }
+
+  Future<void> loadDefaultImage() async {
+    if (images == null) {
+      final ByteData bytes =
+          await rootBundle.load('assets/icons/epub_logo.png');
+      final Uint8List list = bytes.buffer.asUint8List();
+      images = [list];
+      setState(() {});
+    }
   }
 
   Future<void> openEpub() async {
     EpubViewer.setConfig(
-
-        themeColor: Colors.green,
-        identifier: "iosBook",
-        scrollDirection: EpubScrollDirection.HORIZONTAL,
-        allowSharing: true,
-        );
+      themeColor: Colors.green,
+      identifier: "iosBook",
+      scrollDirection: EpubScrollDirection.HORIZONTAL,
+      allowSharing: true,
+    );
 
     // EpubViewer.locatorStream.listen((locator) {
     //   print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
     // });
-  // EpubViewer.open('/storage/emulated/0/Download/1.epub');
+    // EpubViewer.open('/storage/emulated/0/Download/1.epub');
     await EpubViewer.openAsset(
       context.read<HomeViewModel>().epubsPath[widget.index].toString(),
       lastLocation: EpubLocator.fromJson({
@@ -90,7 +101,7 @@ class _ItemBodyState extends State<_ItemBody> {
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.black54,
+            color: Colors.black12,
             image: images == null
                 ? null
                 : DecorationImage(

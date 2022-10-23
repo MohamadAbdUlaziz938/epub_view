@@ -9,8 +9,11 @@ class HomeViewModel extends ChangeNotifier {
   bool isLoading = true;
   List<List<int>> epubListUnit = [];
   late EpubController epubReaderController;
-  List<EpubBook> epubListBook = [];
+  List<EpubBook?> epubListBook = [];
   List epubsPath = [];
+
+  // List<Image?> images=[];
+  late EpubController _epubController;
 
   loadData() async {
     isLoading = true;
@@ -19,13 +22,16 @@ class HomeViewModel extends ChangeNotifier {
     Map allPaths = json.decode(assets);
     epubsPath =
         allPaths.keys.where((element) => element.endsWith(".epub")).toList();
+    print(epubsPath);
     for (int i = 0; i < epubsPath.length; i++) {
-      ByteData audioByteData = await rootBundle.load(epubsPath[i]);
-      final Uint8List unit8List = audioByteData.buffer.asUint8List(
-          audioByteData.offsetInBytes, audioByteData.lengthInBytes);
-      final unitInt = unit8List.cast<int>();
-      epubListUnit.add(unitInt);
-      epubListBook.add(await EpubReader.readBook(unitInt));
+      try {
+        final a = await EpubDocument.openAsset(
+          epubsPath[i],
+        );
+        epubListBook.add(a);
+      } catch (e) {
+        epubListBook.add(null);
+      }
     }
 
     isLoading = false;
