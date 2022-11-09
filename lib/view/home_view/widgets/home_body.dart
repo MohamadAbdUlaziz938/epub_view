@@ -72,7 +72,7 @@ class _ItemBodyState extends State<_ItemBody> {
     EpubViewer.setConfig(
       themeColor: Colors.green,
       identifier: "iosBook",
-      scrollDirection: EpubScrollDirection.HORIZONTAL,
+      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
       allowSharing: true,
     );
 
